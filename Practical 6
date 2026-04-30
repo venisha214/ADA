@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class SearchAlgorithms {
+
+    static int linearSearch(int[] arr, int key) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    static int binarySearch(int[] arr, int key) {
+        int low = 0, high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (arr[mid] == key) {
+                return mid;
+            } else if (arr[mid] < key) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+
+        System.out.println("Enter sorted elements (for binary search):");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        System.out.print("Enter element to search: ");
+        int key = sc.nextInt();
+
+        int linResult = linearSearch(arr, key);
+        int binResult = binarySearch(arr, key);
+
+        System.out.println("Linear Search Result: " + (linResult != -1 ? "Found at index " + linResult : "Not Found"));
+        System.out.println("Binary Search Result: " + (binResult != -1 ? "Found at index " + binResult : "Not Found"));
+    }
+}
